@@ -26,12 +26,27 @@ function App() {
   const loading = false;
   if (loading) return <h1>Cargando comentarios...</h1>;
 
+  const addComentario = (newComentario) => {
+    setComments((prevComments) => {
+        // Verificar si el comentario ya existe en la lista
+        if (prevComments.includes(newComentario)) {
+            // Si existe, lo eliminamos
+            return prevComments.filter(comentario => comentario !== newComentario);
+        } else {
+            // Si no existe, lo agregamos
+            return [...prevComments, newComentario];
+        }
+    });
+};
+
+
   return (
-    <div className='container'>
-      <div style={{ backgroundColor: 'brown' }}>
-      <Header titulo={titulo}  autor={Autor} ficha={Ficha} centro={Centro}/>
-      </div>
-      <ComentarioForm/>
+    <div 
+    className='container'>
+      <Header 
+      titulo={titulo}  autor={Autor} ficha={Ficha} centro={Centro}/>
+      <ComentarioForm 
+      handleAdd={ addComentario }/>
       <ComentarioStats 
       comentarios={comments}/>
       <ComentarioLista 
