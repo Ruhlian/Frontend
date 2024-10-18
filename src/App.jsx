@@ -28,13 +28,17 @@ function App() {
 
   const addComentario = (newComentario) => {
     setComments((prevComments) => {
-        // Verificar si el comentario ya existe en la lista
-        if (prevComments.includes(newComentario)) {
+        // Verificar si el comentario ya existe en la lista usando el id
+        const exists = prevComments.some(comentario => comentario.id === newComentario.id);
+
+        if (exists) {
             // Si existe, lo eliminamos
-            return prevComments.filter(comentario => comentario !== newComentario);
+            return prevComments.filter(comentario => comentario.id !== newComentario.id);
         } else {
             // Si no existe, lo agregamos
-            return [...prevComments, newComentario];
+            // Asignar un nuevo id al nuevo comentario (opcional, dependiendo de tu lógica)
+            const newId = prevComments.length > 0 ? Math.max(...prevComments.map(c => c.id)) + 1 : 1;
+            return [...prevComments, { ...newComentario, id: newId }];
         }
     });
 };
