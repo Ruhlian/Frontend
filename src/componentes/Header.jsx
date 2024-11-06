@@ -5,18 +5,18 @@ const Header = (props) => {
         backgroundColor: 'black',
         color: 'red',
         padding: '10px',
-        textAlign: 'center', // Centrar el texto en el header
+        textAlign: 'center',
     };
 
     const infoStyles = {
         color: 'white',
-        margin: '5px 0', // Espaciado entre elementos
+        margin: '5px 0',
         padding: '5px',
         borderRadius: '5px',
     };
 
     const autorStyles = {
-        ...infoStyles, // Reutilización de estilos comunes
+        ...infoStyles,
         backgroundColor: 'brown',
     };
 

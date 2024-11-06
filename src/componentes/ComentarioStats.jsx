@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ComentariosContexto } from '../contexto/ComentariosContexto';
 
-const ComentarioStats = ({ comentarios }) => {
+const ComentarioStats = () => {
+    const { comentarios } = useContext(ComentariosContexto);
 
-  const totalComentarios = comentarios.length;
+    const totalComentarios = comentarios.length;
+    const promedioCalificacion = totalComentarios > 0 
+        ? (comentarios.reduce((acc, curr) => acc + curr.calificacion, 0) / totalComentarios).toFixed(1)
+        : 0;
 
-  const promedioCalificacion = comentarios.length > 0 
-    ? (comentarios.reduce((acc, curr) => acc + curr.calificacion, 0) / totalComentarios).toFixed(1)
-    : 0;
-  return (
-    <div className='feedback-stats'>
-      <h4>Comentarios: {totalComentarios}</h4>
-      {/*El numero de comentarios que hay en el arreglo de comentario */}
-      <h4>Calificación promedio: {promedioCalificacion}</h4>
-      {/* El promedio de calificaciones de los comentarios en el arreglo
-      reduce js*/}
-    </div>
-  );
-}
+    return (
+        <div className='feedback-stats'>
+            <h4>Comentarios: {totalComentarios}</h4>
+            <h4>Calificación promedio: {promedioCalificacion}</h4>
+        </div>
+    );
+};
 
 export default ComentarioStats;
